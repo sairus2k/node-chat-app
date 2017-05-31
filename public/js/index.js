@@ -1,5 +1,6 @@
 const socket = window.io();
 const moment = window.moment;
+const Mustache = window.Mustache;
 const getPosition = (options) => new Promise((resolve, reject) => {
   navigator.geolocation.getCurrentPosition(resolve, reject, options);
 });
@@ -13,21 +14,16 @@ socket.on('disconnect', () => {
   console.log('Disconnected from server');
 });
 
-socket.on('newMessage', (message) => {
-  const formattedTime = formatTime(message.createdAt);
-  const li = $('<li></li>');
-  li.text(` ${formattedTime} ${message.from}: ${message.text}`)
-  $('#messages').append(li);
+socket.on('newMessage', ({from, text, createdAt}) => {
+  const template = $('#message-template').html();
+  const html = Mustache.render(template, { from, text, createdAt: formatTime(createdAt) });
+  $('#messages').append(html);
 });
 
-socket.on('newLocationMessage', (message) => {
-  const formattedTime = formatTime(message.createdAt);
-  const $li = $('<li></li>');
-  const $a = $('<a target="_blank">My current location</a>');
-  $li.text(`${formattedTime} ${message.from}: `);
-  $a.attr('href', message.url);
-  $li.append($a);
-  $('#messages').append($li);
+socket.on('newLocationMessage', ({ from, url, createdAt }) => {
+  const template = $('#location-message-template').html();
+  const html = Mustache.render(template, { from, url, createdAt: formatTime(createdAt) });
+  $('#messages').append(html);
 });
 
 $('#message-form').on('submit', (e) => {
