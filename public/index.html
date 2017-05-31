@@ -5,54 +5,27 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Join | Chat App</title>
   <link rel="stylesheet" href="/css/styles.min.css">
 </head>
-<body class="chat">
-<div class="chat__sidebar">
-  <h3>People</h3>
-  <div id="users"></div>
+<body class="centered-form">
+<div class="centered-form__form">
+  <form action="/chat.html">
+    <div class="form-field">
+      <h3>Join a Chat</h3>
+    </div>
+    <div class="form-field">
+      <label for="form-name">Display name</label>
+      <input id="form-name" type="text" name="name" autofocus>
+    </div>
+    <div class="form-field">
+      <label for="form-room">Room name</label>
+      <input id="form-room" type="text" name="room">
+    </div>
+    <div class="form-field">
+      <button>Join</button>
+    </div>
+  </form>
 </div>
-<div class="chat__main">
-
-  <ol id="messages" class="chat__messages"></ol>
-  <div class="chat__footer">
-    <form action="" id="message-form">
-      <input type="text" name="message" placeholder="Message" autofocus autocomplete="off">
-      <button>Send</button>
-    </form>
-    <button id="send-location">Send Location</button>
-  </div>
-</div>
-
-<script id="message-template" type="text/template">
-<li class="message">
-  <div class="message__title">
-    <h4>{{from}}</h4>
-    <span>{{createdAt}}</span>
-  </div>
-  <div class="message__body">
-    <p>{{text}}</p>
-  </div>
-</li>
-</script>
-
-<script id="location-message-template" type="text/template">
-<li class="message">
-  <div class="message__title">
-    <h4>{{from}}</h4>
-    <span>{{createdAt}}</span>
-  </div>
-  <div class="message__body">
-    <p><a target="_blank" href="{{url}}">My current location</a></p>
-  </div>
-</li>
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js" integrity="sha256-iaqfO5ue0VbSGcEiQn+OeXxnxAMK2+QgHXIDA5bWtGI=" crossorigin="anonymous"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/index.js"></script>
 </body>
 </html>
